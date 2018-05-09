@@ -132,4 +132,7 @@
       <Name>DictionaryApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\oxford.png" />
+  </ItemGroup>
 </Project>

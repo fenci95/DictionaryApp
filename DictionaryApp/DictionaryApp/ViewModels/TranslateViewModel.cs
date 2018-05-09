@@ -173,59 +173,74 @@ namespace DictionaryApp.ViewModels
             TranslationEntry.Clear();
             foreach (var k in TransResult.results)
             {
-                foreach (var i in k.lexicalEntries)
+                if (k.lexicalEntries != null)
                 {
-                    var trans_item = new TranslateEntry();
-                    trans_item.Type = i.lexicalCategory;
-                    trans_item.Examples = "Examples: \n\n";
-                    trans_item.Translations = "Translations: \n\n";
-                    foreach (var j in i.entries)
+                    foreach (var i in k.lexicalEntries)
                     {
-                        foreach (var y in j.senses)
+                        var trans_item = new TranslateEntry();
+                        trans_item.Type = i.lexicalCategory;
+                        trans_item.Examples = "Examples: \n\n";
+                        trans_item.Translations = "Translations: \n\n";
+                        if (i.entries != null)
                         {
-                            
-                            if (y.translations != null)
+                            foreach (var j in i.entries)
                             {
-                                foreach (var x in y.translations)
+                                if (j.senses != null)
                                 {
-                                    if (!trans_item.Translations.Contains(x.text))
-                                        trans_item.Translations += x.text + "\n";
-                                }
-                            }
-                            if (y.examples != null)
-                            {
-                                foreach (var example in y.examples)
-                                {
-                                    trans_item.Examples += example.text + "\n" + example.translations.ElementAt(0).text + "\n\n";
-                                }
-                            }
-                            if (y.subsenses != null)
-                            {
-                                foreach (var x in y.subsenses)
-                                {
-                                    if (x.translations != null)
+                                    foreach (var y in j.senses)
                                     {
-                                        foreach (var trans in x.translations)
-                                        {
-                                            if (!trans_item.Translations.Contains(trans.text))
-                                                trans_item.Translations += trans.text + "\n";
-                                        }
-                                    }
-                                    if (x.examples != null)
-                                    {
-                                        foreach (var example in x.examples)
-                                        {
-                                            trans_item.Examples += example.text + "\n" + example.translations.ElementAt(0).text + "\n\n";
-                                        }
-                                    }
-                                }
-                            }
 
+                                        if (y.translations != null)
+                                        {
+                                            foreach (var x in y.translations)
+                                            {
+                                                if (!trans_item.Translations.Contains(x.text))
+                                                    trans_item.Translations += x.text + "\n";
+                                            }
+                                        }
+                                        if (y.examples != null)
+                                        {
+                                            foreach (var example in y.examples)
+                                            {
+                                                if (example.translations != null) {
+                                                    trans_item.Examples += example.text + "\n" + example.translations.ElementAt(0).text + "\n\n";
+                                                }
+                                            }
+                                        }
+                                        if (y.subsenses != null)
+                                        {
+                                            foreach (var x in y.subsenses)
+                                            {
+                                                if (x.translations != null)
+                                                {
+                                                    foreach (var trans in x.translations)
+                                                    {
+                                                        if (!trans_item.Translations.Contains(trans.text))
+                                                            trans_item.Translations += trans.text + "\n";
+                                                    }
+                                                }
+                                                if (x.examples != null)
+                                                {
+                                                    foreach (var example in x.examples)
+                                                    {
+                                                        if (example.translations != null)
+                                                        {
+                                                            trans_item.Examples += example.text + "\n" + example.translations.ElementAt(0).text + "\n\n";
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+
+                            }
                         }
-                    }
-                    TranslationEntry.Add(trans_item);
-                }
 
+                        TranslationEntry.Add(trans_item);
+                    }
+                }
             }
         }
 

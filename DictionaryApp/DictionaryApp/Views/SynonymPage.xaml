@@ -9,6 +9,13 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
+            <StackLayout.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="0,20,0,0" />
+                    <On Platform="Android" Value="0,0,0,0" />
+                </OnPlatform>
+            </StackLayout.Margin>
+            <Image Source="oxford.png" Margin="10"/>
             <Label Text="Select language:" FontSize="Medium" />
             <Picker ItemsSource="{Binding InputLanguages}" SelectedItem="{Binding SelectedInput}" Title="Select language"/>
             <Label Text="Word:" FontSize="Medium"/>
