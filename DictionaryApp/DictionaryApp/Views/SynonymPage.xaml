@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DictionaryApp.Views.SynonymPage"
+             xmlns:viewModels = "clr-namespace:DictionaryApp.ViewModels"
+             Title="Synonyms">
+    <ContentPage.BindingContext>
+        <viewModels:SynonymViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Select language:" FontSize="Medium" />
+            <Picker ItemsSource="{Binding InputLanguages}" SelectedItem="{Binding SelectedInput}" Title="Select language"/>
+            <Label Text="Word:" FontSize="Medium"/>
+            <Entry Text="{Binding Word}"/>
+            <Button Text="Synonyms" Command="{Binding SynonymCommand}"/>
+            
+            <ListView ItemsSource="{Binding Synonyms}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Type}" FontSize="Medium" FontAttributes="Bold"/>
+                                <Label Text="{Binding SynonymItems}" Margin="10"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels = "clr-namespace:DictionaryApp.ViewModels"
+             x:Class="DictionaryApp.Views.TranslatePage"
+             Title="Translate">
+    <ContentPage.BindingContext>
+        <viewModels:TranslateViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Source language:" FontSize="Medium"/>
+            <Picker Title="Select source language" ItemsSource="{Binding InputLanguages}" SelectedItem="{Binding SelectedInput}"/>
+            <Label Text="Target language:" FontSize="Medium" />
+            <Picker Title="Select target language" ItemsSource="{Binding OutputLanguages}" SelectedItem="{Binding SelectedOutput}"/>
+            <Label Text="Word:" FontSize="Medium"/>
+            <Entry Text="{Binding Word, Mode=TwoWay}"/>
+            <Button Text="Translate" FontSize="Medium" Command="{Binding TranslationCommand}"/>
+
+            <ListView ItemsSource="{Binding TranslationEntry}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Type}" FontSize="Medium" FontAttributes="Bold"/>
+                                <Label Text="{Binding Translations}" Margin="10"/>
+                                <Label Text="{Binding Examples}" Margin="10"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

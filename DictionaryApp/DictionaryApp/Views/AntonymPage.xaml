@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DictionaryApp.Views.AntonymPage"
+             xmlns:viewModels = "clr-namespace:DictionaryApp.ViewModels"
+             Title="Antonyms">
+    <ContentPage.BindingContext>
+        <viewModels:AntnymViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Select language:" FontSize="Medium" />
+            <Picker ItemsSource="{Binding InputLanguages}" SelectedItem="{Binding SelectedInput}" Title="Select language"/>
+            <Label Text="Word:" FontSize="Medium"/>
+            <Entry Text="{Binding Word}"/>
+            <Button Text="Antonyms" Command="{Binding AntonymCommand}"/>
+            <ScrollView>
+            <ListView ItemsSource="{Binding Antonyms}" HasUnevenRows="true" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Type}" FontAttributes="Bold" FontSize="Medium"/>
+                                <Label Text="{Binding AntonymItems}" Margin="10"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
